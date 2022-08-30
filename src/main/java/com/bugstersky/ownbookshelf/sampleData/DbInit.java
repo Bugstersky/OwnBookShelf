@@ -1,14 +1,4 @@
-
-
-/***
-
- - Uncomment code below to push set of data after you start 1 time comment again
- - data is saved in database
-**/
-
-
-
-
+//
 //package com.bugstersky.ownbookshelf.sampleData;
 //
 //import com.bugstersky.ownbookshelf.entity.Book;
@@ -33,9 +23,9 @@
 //    public void postBookList (){
 //        List<Book> books = List.of(
 //                new Book("classic 1", "Michal", Genre.CLASSICS, Form.EBOOK, "ENG"),
-//                new Book("KJpsdols", "Adam", Genre.ADVENTURE, Form.EBOOK, "ENG"),
-//                new Book("asjdfiasj", "Kornel", Genre.ADVENTURE, Form.EBOOK, "ENG"),
-//                new Book("fasijhfja", "Jakub", Genre.ROMANCE, Form.EBOOK, "ENG"),
+//                new Book("KDollops", "Adam", Genre.ADVENTURE, Form.EBOOK, "ENG"),
+//                new Book("fiasco", "Kornel", Genre.ADVENTURE, Form.EBOOK, "ENG"),
+//                new Book("fashionista", "Jakub", Genre.ROMANCE, Form.EBOOK, "ENG"),
 //                new Book("12", "Pawel", Genre.FANTASY, Form.EBOOK, "PL"),
 //                new Book("classic 2", "Jakub", Genre.CLASSICS, Form.EBOOK, "PL"),
 //                new Book("32", "Kornel", Genre.DETECTIVE, Form.EBOOK, "PL"),

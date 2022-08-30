@@ -5,11 +5,12 @@ import com.bugstersky.ownbookshelf.repository.BookRepo;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping
 public class BookController implements ErrorController {
     private final static String PATH = "/error";
     private final BookRepo bookRepo;
@@ -19,7 +20,7 @@ public class BookController implements ErrorController {
     }
 
     @GetMapping("/list")
-    public List<Book> getAllBooks(){
+    public Iterable<Book> getAllBooks(){
         return bookRepo.findAll();
     }
 
@@ -29,7 +30,7 @@ public class BookController implements ErrorController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCustomerById(@PathVariable Integer id) {
+    public void deleteBookById(@PathVariable Integer id) {
         if (id == null) {
             throw new NullPointerException("Record not found");
         }

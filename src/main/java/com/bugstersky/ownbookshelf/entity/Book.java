@@ -12,15 +12,12 @@ public class Book {
 
     @Id
     @GeneratedValue(
-            strategy= GenerationType.IDENTITY,
+            strategy= GenerationType.AUTO,
             generator="native"
     )
-    @GenericGenerator(
-            name = "native",
-            strategy = "native"
-    )
     @Column(
-            name = "id"
+            name = "id",
+            nullable = false
     )
     private Integer id;
     @Column(
@@ -76,9 +73,7 @@ public class Book {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) {this.id = id;}
 
     public String getTitle() {
         return title;
