@@ -1,14 +1,14 @@
-# OwnBookShelf - application to store book collection with PostgreSQL database
+# OwnBookShelf - application to store book collection with MySQL database
 Form of application to improve spring boot skills
 
 
 ## Screenshots
-### Testing with Postman app
 
-1) Save the book with JSON format
+### Main View with example of book 
 
-![image](https://user-images.githubusercontent.com/98978049/188516608-cb0141be-e239-4a19-bda8-d1f5eaf49672.png)
+![image](https://user-images.githubusercontent.com/98978049/196038124-3e6085d1-7d8e-4d65-8d7f-dec87a7f05cf.png)
 
-2) Find book by particular ID 
+### Basic empty field handling in form to save books
+![image](https://user-images.githubusercontent.com/98978049/196038093-60196928-3c11-4e25-a064-d16edf2b5fd4.png)
 
-![image](https://user-images.githubusercontent.com/98978049/188516665-1724c91f-4cbb-4f68-a148-073bf2587670.png)
+
