@@ -1,0 +1,78 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Book form</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous"/>
+
+    <style>
+        .error{
+        color:red;
+        font-weight:bold
+        }
+        .back {
+          background:linear-gradient(rgba(192, 107, 107, 0.3),rgb(0,0,0,.7));
+          min-height: 100vh;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+        }
+        .content{
+        max-width:650px;
+        margin:auto;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="back">
+    <div class="container content" >
+
+        <br><br>
+        <h3 class="font-monospace">The Book</h3>
+        <hr/>
+
+        <form th:action="@{/api/v1/saveBook}" th:object="${book}" method="POST">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="input-group mb-3">
+                <p th:if="${#fields.hasErrors('title')}" th:class="${#fields.hasErrors('title')}? error"
+                   th:errors="*{title}">
+                    Invalid Title</p>
+                <span class="input-group-text">Title</span>
+                <input type="text" th:field="*{title}" class="form-control " placeholder="Enter Title"/>
+            </div>
+
+            <div class="input-group mb-3">
+                <p th:if="${#fields.hasErrors('author')}" th:class="${#fields.hasErrors('author')}? error"
+                   th:errors="*{author}">Invalid author</p>
+                <span class="input-group-text">Author</span>
+                <input type="text" th:field="*{author}" class="form-control " placeholder="Enter Author"/>
+            </div>
+
+            <div class="input-group mb-3">
+                <p th:if="${#fields.hasErrors('genre')}" th:class="${#fields.hasErrors('genre')}? error"
+                   th:errors="*{genre}">
+                    Invalid Genre</p>
+                <span class="input-group-text">Genre</span>
+                <input type="text" th:field="*{genre}" class="form-control " placeholder="Enter genre"/>
+            </div>
+
+            <div class="input-group mb-3">
+                <p th:if="${#fields.hasErrors('language')}" th:class="${#fields.hasErrors('language')}?error"
+                   th:errors="*{language}">Invalid Language</p>
+                <span class="input-group-text">Language</span>
+                <input type="text" th:field="*{language}" class="form-control " placeholder="Enter language"/>
+            </div>
+            <button type="submit" class="btn btn-primary col-2">Save</button>
+
+        </form>
+        <hr/>
+        <a th:href="@{/api/v1/list}" class="btn btn-primary">Back to list</a>
+    </div>
+</div>
+</body>
+</html>

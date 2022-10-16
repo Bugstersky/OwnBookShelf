@@ -1,79 +1,54 @@
 package com.bugstersky.ownbookshelf.entity;
 
-import com.bugstersky.ownbookshelf.enums.Form;
-import com.bugstersky.ownbookshelf.enums.Genre;
+import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "books")
 public class Book {
 
     @Id
-    @GeneratedValue(
-            strategy= GenerationType.AUTO,
-            generator="native"
-    )
-    @Column(
-            name = "id",
-            nullable = false
-    )
-    private Integer id;
-    @Column(
-            name = "title",
-            nullable = false,
-            columnDefinition = "TEXT"
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    )
+    @NotEmpty(message = "Title cannot be empty")
+    @Column(name = "title")
     private String title;
-    @Column(
-            name = "author",
-            nullable = false,
-            columnDefinition = "TEXT"
 
-    )
+    @NotEmpty(message = "Author cannot be empty")
+    @Column(name = "author")
     private String author;
 
-    @Enumerated(EnumType.STRING)
-    @Column(
-            name = "genre",
-            nullable = false,
-            columnDefinition = " enum('ADVENTURE','CLASSICS','COMIC','DETECTIVE','FANTASY','HORROR',ROMANCE','POETRY')"
+    @NotEmpty(message = "Genre cannot be empty")
+    @Column(name = "genre")
+    private String genre;
 
-    )
-    private Genre genre;
-
-    @Enumerated(EnumType.STRING)
-    @Column(
-            name = "form",
-            nullable = false,
-            columnDefinition = "enum('SOFTBOOK','HARDBOOK','EBOOK')"
-    )
-    private Form form;
-    @Column(
-            name = "language",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
+    @NotEmpty(message = "Language cannot be empty")
+    @Column(name = "language")
     private String language;
 
     public Book() {
     }
 
-    public Book(String title, String author, Genre genre, Form form, String language) {
+    public Book(Long id, String title, String author, String genre, String language) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.form = form;
         this.language = language;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {this.id = id;}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -91,21 +66,6 @@ public class Book {
         this.author = author;
     }
 
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public Form getForm() {
-        return form;
-    }
-
-    public void setForm(Form form) {
-        this.form = form;
-    }
 
     public String getLanguage() {
         return language;
@@ -115,15 +75,25 @@ public class Book {
         this.language = language;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", genre=" + genre +
-                ", form=" + form +
-                ", language='" + language + '\'' +
-                '}';
+    public String getGenre() {
+        return genre;
     }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(genre, book.genre) && Objects.equals(language, book.language);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, author, genre, language);
+    }
+
 }
