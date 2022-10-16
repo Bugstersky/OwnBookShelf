@@ -1,7 +1,7 @@
 package com.bugstersky.ownbookshelf.controller;
 
 import com.bugstersky.ownbookshelf.entity.Book;
-import com.bugstersky.ownbookshelf.repository.BookRepository;
+import com.bugstersky.ownbookshelf.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,16 +17,16 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class BookController {
 
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
+
 
     @GetMapping("/list")
     String getBooks(Model model) {
-        List<Book> allBooks = bookRepository.findAll();
-        model.addAttribute("books", allBooks);
+        model.addAttribute("books", bookService.getAllBooks());
         return "books";
     }
 
@@ -43,7 +43,7 @@ public class BookController {
         if (bindingResult.hasErrors()) {
             return "book-form";
         }
-        bookRepository.save(book);
+        bookService.saveBook(book);
         return "redirect:/api/v1/list";
     }
 
@@ -52,17 +52,14 @@ public class BookController {
     @GetMapping("/editBookForm/{id}")
     public ModelAndView showUpdateForm(@PathVariable("id") Long bookId) {
         ModelAndView mav = new ModelAndView("book-form");
-        Optional<Book> book = bookRepository.findById(bookId);
-        mav.addObject("book",book);
-
+        mav.addObject("book",bookService.getBookById(bookId));
         return mav;
     }
 
     @GetMapping("/deleteBook/{id}")
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
-        Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid book id" + bookId));
-        bookRepository.delete(book);
+        Book book = bookService.getBookById(bookId);
+        bookService.deleteBook(book);
         return "redirect:/api/v1/list";
     }
 
