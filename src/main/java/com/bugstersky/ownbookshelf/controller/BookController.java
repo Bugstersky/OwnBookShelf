@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Controller
+@RestController
 @RequestMapping("/api/v1")
 public class BookController {
 
@@ -47,7 +47,9 @@ public class BookController {
         return "redirect:/api/v1/list";
     }
 
-    // TODO: new form for update books; readme; change text-inputs -> select: option
+    // TODO:
+    //  IMPORTANT-> Change book to transfer object , use indirect form of entity
+    //  LESS IMPORTANT -> new form for update books; readme; change text-inputs -> select: option
 
     @GetMapping("/editBookForm/{id}")
     public ModelAndView showUpdateForm(@PathVariable("id") Long bookId) {
